@@ -202,9 +202,11 @@ echo "<h2>Exercício Prático</h2>";
 
 // Função para calcular média de notas
 
-
-// 6º Digitação (Aqui)
-
+function Media($notas) {
+    $soma = array_sum($notas);
+    $media = $soma / count($notas);
+    return $media;
+}
 
 // Criando um array com alunos e notas
 $turma = [
@@ -217,8 +219,23 @@ $turma = [
 
 // Exibindo os resultados
 
+function determinarStatus($media) {
+    if ($media >= 9.0) {
+        return "<span style='color: blue;'>Excelente</span>";
+    } elseif ($media >= 7.0) {
+        return "<span style='color: green;'>Aprovado</span>";
+    } elseif ($media >= 6.0) {
+        return "<span style='color: orange;'>Recuperacao</span>";
+    } else {
+        return "<span style='color: red;'>Reprovado</span>";
+    }
+}
 
-// 7º Digitação (Aqui)
-
-
-?>
+foreach ($turma as $aluno) {
+    $media = Media($aluno["notas"]);
+    $status = determinarStatus($media);
+    $mediaFormatada = number_format($media, 1, ',', '.');
+    
+    
+    echo "Aluno(a): {$aluno['nome']} - Média: {$mediaFormatada} - Status: {$status}<br>";
+}
